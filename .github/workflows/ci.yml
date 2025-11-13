@@ -1,10 +1,11 @@
-name: CI-demo
+name: CI Demo
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
+  pull_request:
+    branches: [main]
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,7 +16,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.11"
 
-      - name: Run script
-        run: python app.py
+      - name: Install Dependencies
+        run: pip install --upgrade pip
+
+      - name: Run the python script
+        run: python hello.py
